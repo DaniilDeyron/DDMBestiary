@@ -1,0 +1,23 @@
+{
+  "id": "ddm-bestiary",
+  "title": "DDM Bestiary | Бестиарий",
+  "description": "Shared, player-editable illustrated bestiary for Foundry Virtual Tabletop.",
+  "version": "0.1.0",
+  "compatibility": {
+    "minimum": "12",
+    "verified": "12"
+  },
+  "authors": [
+    {
+      "name": "DaniilDeyron"
+    }
+  ],
+  "esmodules": [
+    "scripts/main.js"
+  ],
+  "styles": [
+    "styles/bestiary.css"
+  ],
+  "manifest": "https://github.com/DaniilDeyron/DDMBestiary/releases/latest/download/module.json",
+  "download": "https://github.com/DaniilDeyron/DDMBestiary/releases/download/v0.1.0/ddm-bestiary.zip"
+}
