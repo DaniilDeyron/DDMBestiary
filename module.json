@@ -1,11 +1,10 @@
 {
   "id": "ddm-bestiary",
   "title": "DDM Bestiary | Бестиарий",
-  "description": "Shared illustrated bestiary for Foundry Virtual Tabletop v12.",
-  "version": "0.1.1",
+  "description": "Shared illustrated bestiary for Foundry Virtual Tabletop v13.",
+  "version": "0.1.2",
   "compatibility": {
-    "minimum": "12",
-    "verified": "12"
+    "minimum": "13"
   },
   "authors": [
     {
