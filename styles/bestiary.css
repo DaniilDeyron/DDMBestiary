@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=IM+Fell+English:ital@0;1&display=swap');
+
+.ddm-bestiary-window {
+  --ddm-ink: #382516; --ddm-ink-soft: #6c4a2d; --ddm-gold: #b78a4b;
+  --ddm-paper: #ead8b3; --ddm-paper-dark: #d9c194; --ddm-leather: #24170f;
+  --ddm-red: #792c23; font-family: "Cormorant Garamond", Georgia, serif;
+  color: var(--ddm-ink);
+}
+.ddm-bestiary-window .window-content { padding: 0; overflow: hidden; background: #23170f; }
+.ddm-book-shell { min-height: 100%; display: flex; flex-direction: column; padding: 12px; gap: 9px; background: radial-gradient(ellipse at center,#68482b 0,#281a11 70%); }
+.ddm-book-header { display:flex; justify-content:space-between; align-items:center; min-height:62px; padding: 5px 15px; border:1px solid #8c6235; border-radius:8px; background:linear-gradient(110deg,#170f0b,#3b2618 48%,#1c120d); color:#e4c38b; box-shadow:0 4px 12px #0009,inset 0 0 18px #0008; }
+.ddm-brand { display:flex; align-items:center; gap:13px; }
+.ddm-brand-mark { font-size:38px; color:#c89c5e; text-shadow:0 2px 5px #000; }
+.ddm-brand h1 { margin:0; font-family:"IM Fell English",serif; font-size:31px; line-height:1; color:#e4c58e; }
+.ddm-brand small { color:#b89a70; font-size:13px; letter-spacing:.08em; }
+.ddm-header-actions { display:flex; gap:7px; }
+.ddm-header-actions button { color:#e6c994; border:1px solid #86613b; border-radius:4px; background:linear-gradient(#4a301d,#24170f); padding:7px 12px; font-family:inherit; font-size:15px; }
+.ddm-header-actions button:hover { background:#754b2a; text-shadow:0 0 7px #ffc; }
+.ddm-book-body { display:flex; flex:1; min-height:0; gap:10px; }
+.ddm-categories { width:215px; flex:0 0 215px; display:flex; flex-direction:column; gap:6px; padding:11px 7px; border:1px solid #79512e; border-radius:7px; background:linear-gradient(90deg,#1b100b,#342116 55%,#1d120c); box-shadow:inset 0 0 18px #000b,3px 4px 8px #0008; overflow:auto; }
+.ddm-category { color:#e2c99e; text-align:left; font-family:"IM Fell English",serif; font-size:17px; padding:10px 12px; border:1px solid #79552f; border-radius:3px; background:linear-gradient(90deg,#b18a52,#71502f 55%,#4e321e); box-shadow:inset 0 1px #f2d6a0,0 2px 4px #0008; text-shadow:0 1px #2b1c11; }
+.ddm-category:hover,.ddm-category.active { color:#fff0cf; background:linear-gradient(90deg,#8e2e25,#512019); border-color:#c18a51; }
+.ddm-category i { width:24px; }
+.ddm-cat-symbol { display:inline-block; width:26px; color:#f1d69d; }
+.ddm-home { margin-bottom:6px; }
+.ddm-category-heading { color:#b89968; font-size:11px; letter-spacing:.16em; padding:5px 7px 2px; }
+.ddm-entry-list { border-top:1px solid #78532e; margin-top:3px; padding-top:6px; }
+.ddm-entry { display:flex; align-items:center; gap:8px; width:100%; text-align:left; padding:8px 6px; color:#dcc39a; border:0; border-bottom:1px solid #60432c; background:transparent; font-family:inherit; font-size:14px; }
+.ddm-entry:hover,.ddm-entry.selected { color:#fff0ca; background:linear-gradient(90deg,#772d22,#3d2118); }
+.ddm-entry-number { color:#ba9661; font-size:12px; }
+.ddm-spread { flex:1; min-width:0; display:grid; grid-template-columns:1fr 1fr; border:9px solid #4d2e19; border-radius:9px; overflow:auto; box-shadow:0 5px 18px #000b,inset 0 0 0 2px #b78a4a; background:#bd9661; }
+.ddm-page { position:relative; min-width:0; padding:28px 28px 42px; background-color:var(--ddm-paper); background-image:radial-gradient(ellipse at 25% 18%,#fff5d0a1,transparent 40%),radial-gradient(ellipse at 80% 70%,#9d6d3420,transparent 55%),repeating-linear-gradient(0deg,#87633a08 0,#87633a08 1px,transparent 1px,transparent 4px); box-shadow:inset 0 0 24px #8b63334d; }
+.ddm-left-page { border-right:1px solid #a17b4b; border-radius:5px 0 0 5px; }
+.ddm-right-page { border-radius:0 5px 5px 0; box-shadow:inset 14px 0 20px -20px #3b2413,inset 0 0 24px #8b63334d; }
+.ddm-page:before { content:""; position:absolute; inset:8px; border:1px solid #aa895b80; pointer-events:none; }
+.ddm-page h2 { margin:0 0 5px; text-align:center; font-family:"IM Fell English",serif; font-size:27px; line-height:1.1; color:#3b2617; }
+.ddm-page-number-tag { position:absolute; top:17px; left:18px; padding:4px 9px; transform:rotate(-7deg); color:#583a20; background:#c8ad7e; border:1px solid #947348; font-size:13px; }
+.ddm-subtitle { text-align:center; color:#805c34; font-size:15px; margin-bottom:12px; font-style:italic; }
+.ddm-monster-frame { height:260px; margin:6px 0 12px; display:flex; align-items:center; justify-content:center; border:1px solid #ae8b59; background:radial-gradient(ellipse,#f4e6c8,#d8c094); box-shadow:inset 0 0 20px #76522b44; overflow:hidden; }
+.ddm-monster-image { width:100%; height:100%; object-fit:contain; mix-blend-mode:multiply; }
+.ddm-monster-placeholder { text-align:center; color:#95764c; display:flex; flex-direction:column; gap:8px; align-items:center; }
+.ddm-monster-placeholder i { font-size:65px; opacity:.6; }
+.ddm-monster-placeholder span { font-size:16px; }
+.ddm-monster-placeholder small { font-size:12px; }
+.ddm-copy-block { margin:11px 0; }
+.ddm-copy-block h3 { display:table; margin:0 0 4px; padding:2px 13px; color:#f1dfbd; background:linear-gradient(90deg,#8d3e2c,#59261d); border-radius:12px 3px 12px 3px; font-family:"IM Fell English",serif; font-size:17px; font-weight:500; }
+.ddm-copy-block p { margin:0; color:#3c2a1a; font-size:15px; line-height:1.32; white-space:pre-line; }
+.ddm-page-footer { position:absolute; bottom:10px; left:0; right:0; text-align:center; color:#765431; font-family:"IM Fell English",serif; font-size:19px; }
+.ddm-page-footer span { color:#ad8955; padding:0 8px; font-size:12px; }
+.ddm-page-heading { display:flex; align-items:center; justify-content:center; gap:10px; margin:8px 0 20px; padding:5px; color:#f0d8a9; font-family:"IM Fell English",serif; font-size:22px; text-align:center; background:linear-gradient(90deg,transparent,#762e22 20%,#762e22 80%,transparent); }
+.ddm-page-heading span { color:#d7b779; }
+.ddm-harvest-slots { display:grid; grid-template-columns:1fr 1fr; gap:17px; padding:0 12px 17px; }
+.ddm-harvest-slot { min-width:0; height:155px; border:2px solid #a17d4f; outline:1px solid #c4a271; outline-offset:3px; background:linear-gradient(145deg,#d6c199,#eadbb8); box-shadow:inset 0 0 17px #8f633b44,0 3px 5px #68452255; position:relative; }
+.ddm-add-slot { width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; color:#98764b; background:transparent; border:0; }
+.ddm-add-slot span { font-size:45px; line-height:1; }
+.ddm-add-slot small { font-size:12px; }
+.ddm-add-slot:hover { color:#6d462b; background:#fff4d433; }
+.ddm-harvest-item { height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; padding:8px; text-align:center; }
+.ddm-item-art { font-size:43px; color:#7c4268; text-shadow:0 2px 4px #fff3; }
+.ddm-harvest-item strong { font-size:14px; color:#49301c; }
+.ddm-harvest-item small { color:#77532e; }
+.ddm-remove-harvest { position:absolute; top:-10px; right:-10px; z-index:1; width:25px; height:25px; border-radius:50%; border:1px solid #d6b77f; color:#f5dfbd; background:#74271e; font-size:18px; line-height:1; }
+.ddm-rule { height:1px; margin:9px 0 14px; background:linear-gradient(90deg,transparent,#9b794e,transparent); }
+.ddm-progress-wrap { margin:5px 8px 16px; padding:6px; border:2px solid #8c6a43; border-radius:20px; background:#39271b; box-shadow:inset 0 2px 7px #000b,0 1px #f4dfb0; }
+.ddm-progress-track { height:28px; position:relative; overflow:hidden; border-radius:15px; background:#281b15; }
+.ddm-progress-fill { height:100%; background:linear-gradient(90deg,#71318b,#b04aca,#e1a7ef); box-shadow:0 0 14px #ae40cf; transition:width .5s ease; }
+.ddm-progress-track strong { position:absolute; inset:0; display:grid; place-items:center; color:#fff1df; font-family:Georgia,serif; font-size:18px; text-shadow:0 2px 3px #260d31; }
+.ddm-research-tasks { display:flex; flex-direction:column; gap:9px; padding:5px 14px; }
+.ddm-research-task { display:flex; align-items:center; gap:10px; color:#49301c; font-size:15px; cursor:pointer; }
+.ddm-research-task input { position:absolute; opacity:0; pointer-events:none; }
+.ddm-checkmark { width:19px; height:19px; flex:0 0 19px; border:2px solid #745633; background:#e7d6b1; box-shadow:inset 0 1px 3px #6c4b2c55; }
+.ddm-research-task.done .ddm-checkmark { background:#7a6b32; border-color:#594923; }
+.ddm-research-task.done .ddm-checkmark:after { content:"✓"; display:block; color:#fff0c8; font-size:17px; line-height:15px; text-align:center; }
+.ddm-studied-banner,.ddm-pending-banner { margin:20px 2px 0; padding:16px 6px; text-align:center; font-family:"IM Fell English",serif; border:1px solid #9b7346; color:#f4dfb7; background:linear-gradient(90deg,#4b291c,#873c30,#4b291c); box-shadow:0 0 14px #a1475533; }
+.ddm-studied-banner { color:#ffe3ad; font-size:21px; text-shadow:0 0 9px #e7a4ff; }
+.ddm-studied-banner span { color:#dfb9f4; padding:0 8px; }
+.ddm-pending-banner { color:#705238; background:#cdb78f; font-size:15px; }
+.ddm-book-footer { display:flex; justify-content:space-between; padding:4px 9px 0; color:#b9996e; font-size:11px; letter-spacing:.12em; }
+.ddm-empty { flex:1; display:grid; place-items:center; color:#e0c18d; font-size:22px; }
+.ddm-harvest-slot.drag-over { outline:3px solid #a35ac1; background:#f3e1f1; }
+.ddm-bestiary-window .window-resizable-handle { filter:sepia(1); }
+
+@media(max-width:850px) {
+  .ddm-categories { width:155px; flex-basis:155px; }
+  .ddm-page { padding:20px 16px 38px; }
+  .ddm-monster-frame { height:190px; }
+  .ddm-page h2 { font-size:21px; }
+  .ddm-copy-block p,.ddm-research-task { font-size:13px; }
+  .ddm-harvest-slot { height:120px; }
+}
