@@ -88,3 +88,19 @@
   .ddm-copy-block p,.ddm-research-task { font-size:13px; }
   .ddm-harvest-slot { height:120px; }
 }
+
+
+.ddm-header-actions button.active { color:#fff0cf; background:linear-gradient(90deg,#8e2e25,#512019); border-color:#c18a51; }
+.ddm-recipe-spread .ddm-recipe-art { height:390px; margin-top:20px; }
+.ddm-recipe-materials { display:flex; flex-direction:column; gap:10px; margin:18px 12px; }
+.ddm-material-row { display:flex; align-items:center; gap:10px; padding:10px 12px; border-bottom:1px solid #a98a5c; color:#49301c; background:linear-gradient(90deg,#d8c49c88,transparent); font-size:17px; }
+.ddm-material-symbol { color:#8c542d; font-size:15px; }
+.ddm-material-name { flex:1; }
+.ddm-material-row strong { color:#713b28; min-width:35px; text-align:right; }
+.ddm-remove-material { border:1px solid #9b6949; border-radius:50%; width:23px; height:23px; line-height:18px; color:#f3dfc0; background:#74271e; }
+.ddm-add-material { display:block; margin:14px auto; padding:8px 18px; border:1px solid #8b673f; border-radius:3px; color:#f0d8a9; background:linear-gradient(#75452b,#3d2418); font-family:inherit; font-size:15px; }
+.ddm-add-material:hover { background:#873c30; }
+.ddm-material-empty { color:#806344; text-align:center; font-style:italic; padding:25px 8px; }
+.ddm-recipe-note { display:flex; align-items:center; gap:10px; justify-content:center; margin:35px 12px 0; padding:16px 10px; border-top:1px solid #a98a5c; border-bottom:1px solid #a98a5c; color:#795432; text-align:center; font-style:italic; }
+.ddm-recipe-note p { margin:0; }
+.ddm-recipe-note span { color:#aa8753; }
