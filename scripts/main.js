@@ -93,7 +93,9 @@ class BestiaryApp extends Application {
       categoryEntries: entries.filter(e => (e.category || "Прочее") === this._activeCategory),
       progress,
       studied: progress >= 100,
-      isGM: game.user.isGM
+      isGM: game.user.isGM,
+      harvestSlots: [0, 1],
+      nextPage: Number(selected?.number || 0) + 1
     };
   }
 
@@ -117,6 +119,11 @@ class BestiaryApp extends Application {
       this.render();
     });
     html.find("[data-action='task-toggle']").on("change", ev => {
+      if (!game.user.isGM) {
+        ui.notifications.warn("Изменять общий прогресс пока может только Мастер.");
+        ev.currentTarget.checked = !ev.currentTarget.checked;
+        return;
+      }
       this._toggleTask(ev.currentTarget.dataset.taskId, ev.currentTarget.checked);
     });
     html.find("[data-action='new-entry']").on("click", () => this._newEntry());
@@ -264,12 +271,12 @@ class BestiaryApp extends Application {
     ev.currentTarget.classList.remove("drag-over");
     const data = TextEditor.getDragEventData(ev);
     const slot = Number(ev.currentTarget.dataset.slot);
-    if (!data || !["Item", "Actor"].includes(data.type) && !data.uuid) return;
+    if (!data || (!data.uuid && data.type !== "Item")) return;
     let item;
     try {
       if (data.uuid) item = await fromUuid(data.uuid);
       else if (data.type === "Item") item = game.items.get(data.id);
-      else if (data.type === "Actor") item = game.actors.get(data.id);
+      
     } catch (err) { console.warn(err); }
     if (!item) return ui.notifications.warn("Не удалось прочитать перетаскиваемый объект.");
     const entries = foundry.utils.deepClone(game.settings.get(MODULE_ID, "entries"));
