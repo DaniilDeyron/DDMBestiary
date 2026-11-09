@@ -87,8 +87,24 @@ class BestiaryApp extends Application {
 }
 
 
-// Add a direct action button to the existing Token controls.
-// It opens the bestiary immediately and does not create a separate control group.
+// Open the actual journal application and surface failures in Foundry's UI/console.
+function openDDMBestiary() {
+  console.info("DDM Bestiary | Open button activated.");
+  try {
+    if (!game.modules.get(MODULE_ID)?.active) {
+      ui.notifications.error("DDM Bestiary: модуль не активен.");
+      return;
+    }
+    const app = new BestiaryApp();
+    app.render(true);
+    console.info("DDM Bestiary | Application render requested.", app);
+  } catch (error) {
+    console.error("DDM Bestiary | Failed to open the application.", error);
+    ui.notifications.error("DDM Bestiary: не удалось открыть окно. Подробности в консоли браузера (F12).");
+  }
+}
+
+// One direct button in the Token controls. No extra control group or sub-menu.
 Hooks.on("getSceneControlButtons", controls => {
   const tokenControls = controls.tokens;
   if (!tokenControls) {
@@ -103,7 +119,8 @@ Hooks.on("getSceneControlButtons", controls => {
     button: true,
     visible: true,
     order: Object.keys(tokenControls.tools).length,
-    onChange: () => new BestiaryApp().render(true)
+    onChange: openDDMBestiary,
+    onClick: openDDMBestiary
   };
 });
 
