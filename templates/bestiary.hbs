@@ -1,0 +1,104 @@
+<div class="ddm-book-shell">
+  <header class="ddm-book-header">
+    <div class="ddm-brand"><span class="ddm-brand-mark">✥</span><div><h1>Бестиарий</h1><small>Полевые заметки экспедиции</small></div></div>
+    <div class="ddm-header-actions">
+      <button data-action="new-entry" title="Новая запись"><i class="fas fa-plus"></i> Новая запись</button>
+      {{#if isGM}}<button data-action="edit-entry"><i class="fas fa-feather-alt"></i> Редактировать</button>{{/if}}
+      <button data-action="set-image" title="Выбрать изображение"><i class="fas fa-image"></i></button>
+    </div>
+  </header>
+
+  <div class="ddm-book-body">
+    <aside class="ddm-categories">
+      <button class="ddm-category ddm-home" data-action="select-category" data-category="Аберрации"><i class="fas fa-home"></i> Содержание</button>
+      <div class="ddm-category-heading">РАЗДЕЛЫ</div>
+      {{#each categories as category}}
+        <button class="ddm-category {{#if (eq ../activeCategory category)}}active{{/if}}" data-action="select-category" data-category="{{category}}">
+          <span class="ddm-cat-symbol">✧</span>{{category}}
+        </button>
+      {{/each}}
+      <div class="ddm-entry-list">
+        <div class="ddm-category-heading">ЗАПИСИ · {{activeCategory}}</div>
+        {{#each categoryEntries as entry}}
+          <button class="ddm-entry {{#if (eq ../selected.id entry.id)}}selected{{/if}}" data-action="select-entry" data-entry-id="{{entry.id}}">
+            <span class="ddm-entry-number">{{entry.number}}</span><span>{{entry.name}}</span>
+          </button>
+        {{/each}}
+      </div>
+    </aside>
+
+    {{#if selected}}
+    <main class="ddm-spread">
+      <section class="ddm-page ddm-left-page">
+        <div class="ddm-page-number-tag">№{{selected.number}}</div>
+        <h2>{{selected.name}}</h2>
+        <div class="ddm-subtitle">{{selected.category}} {{#if selected.subtitle}}· {{selected.subtitle}}{{/if}}</div>
+        <div class="ddm-monster-frame">
+          {{#if selected.image}}
+            <img class="ddm-monster-image" src="{{selected.image}}" alt="{{selected.name}}">
+          {{else}}
+            <div class="ddm-monster-placeholder"><i class="fas fa-dragon"></i><span>Иллюстрация существа</span><small>Добавьте изображение записи</small></div>
+          {{/if}}
+        </div>
+        <div class="ddm-copy-block">
+          <h3>Описание</h3>
+          <p>{{selected.description}}</p>
+        </div>
+        <div class="ddm-copy-block">
+          <h3>Поведение</h3>
+          <p>{{selected.behavior}}</p>
+        </div>
+        <div class="ddm-copy-block">
+          <h3>Особенности</h3>
+          <p>{{selected.features}}</p>
+        </div>
+        <footer class="ddm-page-footer"><span>✦</span> {{selected.number}} <span>✦</span></footer>
+      </section>
+
+      <section class="ddm-page ddm-right-page">
+        <div class="ddm-page-heading"><span>⚒</span> Можно собрать <span>⚒</span></div>
+        <div class="ddm-harvest-slots">
+          {{#each (array 0 1) as slot}}
+            <div class="ddm-harvest-slot" data-slot="{{slot}}">
+              {{#with (lookup ../selected.harvest slot) as |item|}}
+                {{#if item}}
+                  <div class="ddm-harvest-item">
+                    <button class="ddm-remove-harvest" data-action="remove-harvest" data-slot="{{slot}}" title="Убрать предмет">×</button>
+                    <div class="ddm-item-art">{{item.icon}}</div>
+                    <strong>{{item.name}}</strong>
+                    <small>×{{item.quantity}}</small>
+                  </div>
+                {{else}}
+                  <button class="ddm-add-slot" data-action="add-harvest" data-slot="{{slot}}"><span>＋</span><small>Добавить образец</small></button>
+                {{/if}}
+              {{/with}}
+            </div>
+          {{/each}}
+        </div>
+        <div class="ddm-rule"></div>
+        <div class="ddm-page-heading"><span>▤</span> Процесс изучения <span>▤</span></div>
+        <div class="ddm-progress-wrap">
+          <div class="ddm-progress-track"><div class="ddm-progress-fill" style="width: {{progress}}%"></div><strong>{{progress}}%</strong></div>
+        </div>
+        <div class="ddm-research-tasks">
+          {{#each selected.research.tasks as task}}
+            <label class="ddm-research-task {{#if task.done}}done{{/if}}">
+              <input type="checkbox" data-action="task-toggle" data-task-id="{{task.id}}" {{checked task.done}} {{#unless ../isGM}}disabled{{/unless}}>
+              <span class="ddm-checkmark"></span><span>{{task.label}}</span>
+            </label>
+          {{/each}}
+        </div>
+        {{#if studied}}
+          <div class="ddm-studied-banner"><span>✦</span><strong>СУЩЕСТВО ИЗУЧЕНО!</strong><span>✦</span></div>
+        {{else}}
+          <div class="ddm-pending-banner"><i class="fas fa-lock"></i> Исследование не завершено</div>
+        {{/if}}
+        <footer class="ddm-page-footer"><span>✦</span> {{add selected.number 1}} <span>✦</span></footer>
+      </section>
+    </main>
+    {{else}}
+      <div class="ddm-empty">В этом разделе пока нет записей.</div>
+    {{/if}}
+  </div>
+  <footer class="ddm-book-footer"><span>DDM BESTIARY · FIELD NOTES</span><span>Общий архив экспедиции</span></footer>
+</div>
