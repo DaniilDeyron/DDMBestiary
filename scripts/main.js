@@ -86,6 +86,31 @@ class BestiaryApp extends Application {
   async _dropMaterial(ev) { ev.preventDefault();if(!game.user.isGM)return;const data=TextEditor.getDragEventData(ev);let item;try{item=data.uuid?await fromUuid(data.uuid):(data.type==="Item"?game.items.get(data.id):null);}catch(err){console.warn(err);}if(!item)return;const entries=foundry.utils.deepClone(game.settings.get(MODULE_ID,"entries")||[]);const e=entries.find(x=>x.id===this._selectedId);if(!e)return;e.materials=e.materials||[];e.materials.push({name:item.name,quantity:1,uuid:item.uuid});await this._save(entries); }
 }
 
+
+// Register this hook while the module script is evaluated, not inside "ready".
+// Foundry may initialize the scene-control palette before the ready hook fires.
+Hooks.on("getSceneControlButtons", controls => {
+  controls["ddm-bestiary"] = {
+    name: "ddm-bestiary",
+    title: "DDM Bestiary | Бестиарий",
+    icon: "fa-solid fa-book-open",
+    order: Object.keys(controls).length,
+    visible: true,
+    activeTool: "open",
+    tools: {
+      open: {
+        name: "open",
+        title: "Открыть бестиарий",
+        icon: "fa-solid fa-book-open",
+        button: true,
+        visible: true,
+        order: 0,
+        onChange: () => new BestiaryApp().render(true)
+      }
+    }
+  };
+});
+
 Hooks.once("init",()=>{
   game.settings.register(MODULE_ID,"entries",{name:"Записи DDM Bestiary",scope:"world",config:false,type:Array,default:DEFAULT_ENTRIES});
   game.settings.register(MODULE_ID,"playersCanCreate",{name:"Игроки могут предлагать записи бестиария",hint:"Игроки смогут отправлять Мастеру новые записи на подтверждение.",scope:"world",config:true,type:Boolean,default:false});
@@ -100,27 +125,5 @@ Hooks.once("ready",()=>{
     }});
   });
   game.keybindings.register(MODULE_ID,"open",{name:"Открыть бестиарий",hint:"Открыть общий бестиарий партии",editable:[{key:"KeyB",modifiers:["SHIFT"]}],onDown:()=>{new BestiaryApp().render(true);return true;},restricted:false});
-  Hooks.on("getSceneControlButtons", controls => {
-    // Dedicated control group in the left scene-controls rail (Foundry v13).
-    // A v13 SceneControl requires activeTool and a tools record.
-    controls["ddm-bestiary"] = {
-      name: "ddm-bestiary",
-      title: "DDM Bestiary | Бестиарий",
-      icon: "fa-solid fa-book-open",
-      order: Object.keys(controls).length,
-      visible: true,
-      activeTool: "open",
-      tools: {
-        open: {
-          name: "open",
-          title: "Открыть бестиарий",
-          icon: "fa-solid fa-book-open",
-          button: true,
-          visible: true,
-          order: 0,
-          onChange: () => new BestiaryApp().render(true)
-        }
-      }
-    };
-  });
+
 });
