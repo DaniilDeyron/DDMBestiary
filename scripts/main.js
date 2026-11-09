@@ -308,17 +308,28 @@ Hooks.once("ready", () => {
     restricted: false
   });
 
-  const openButton = {
-    name: "Бестиарий",
-    title: "Открыть бестиарий",
-    icon: "fas fa-book-open",
-    button: true,
-    onClick: () => new BestiaryApp().render(true)
-  };
-
   Hooks.on("getSceneControlButtons", controls => {
-    const tokenControls = controls.tokens;
-    if (tokenControls) tokenControls.tools.push(openButton);
+    // Foundry V12 exposes the controls as an array of SceneControl objects.
+    const tokenControls = Array.isArray(controls)
+      ? controls.find(control => control.name === "token" || control.name === "tokens")
+      : controls.tokens;
+    if (!tokenControls) return;
+
+    tokenControls.tools = tokenControls.tools || [];
+    const openButton = {
+      name: "ddm-bestiary-open",
+      title: "Открыть бестиарий",
+      icon: "fas fa-book-open",
+      button: true,
+      visible: true,
+      onClick: () => new BestiaryApp().render(true)
+    };
+
+    if (Array.isArray(tokenControls.tools)) {
+      tokenControls.tools.push(openButton);
+    } else {
+      tokenControls.tools[openButton.name] = openButton;
+    }
   });
 });
 
