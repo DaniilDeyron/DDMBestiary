@@ -87,27 +87,23 @@ class BestiaryApp extends Application {
 }
 
 
-// Register this hook while the module script is evaluated, not inside "ready".
-// Foundry may initialize the scene-control palette before the ready hook fires.
+// Add a direct action button to the existing Token controls.
+// It opens the bestiary immediately and does not create a separate control group.
 Hooks.on("getSceneControlButtons", controls => {
-  controls["ddm-bestiary"] = {
-    name: "ddm-bestiary",
-    title: "DDM Bestiary | Бестиарий",
+  const tokenControls = controls.tokens;
+  if (!tokenControls) {
+    console.warn("DDM Bestiary | Token controls are unavailable.", controls);
+    return;
+  }
+  tokenControls.tools ??= {};
+  tokenControls.tools["ddm-bestiary-open"] = {
+    name: "ddm-bestiary-open",
+    title: "Открыть DDM Bestiary",
     icon: "fa-solid fa-book-open",
-    order: Object.keys(controls).length,
+    button: true,
     visible: true,
-    activeTool: "open",
-    tools: {
-      open: {
-        name: "open",
-        title: "Открыть бестиарий",
-        icon: "fa-solid fa-book-open",
-        button: true,
-        visible: true,
-        order: 0,
-        onChange: () => new BestiaryApp().render(true)
-      }
-    }
+    order: Object.keys(tokenControls.tools).length,
+    onChange: () => new BestiaryApp().render(true)
   };
 });
 
