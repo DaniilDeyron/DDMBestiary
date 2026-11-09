@@ -58,7 +58,7 @@
       <section class="ddm-page ddm-right-page">
         <div class="ddm-page-heading"><span>⚒</span> Можно собрать <span>⚒</span></div>
         <div class="ddm-harvest-slots">
-          {{#each (array 0 1) as slot}}
+          {{#each harvestSlots as |slot|}}
             <div class="ddm-harvest-slot" data-slot="{{slot}}">
               {{#with (lookup ../selected.harvest slot) as |item|}}
                 {{#if item}}
@@ -93,7 +93,7 @@
         {{else}}
           <div class="ddm-pending-banner"><i class="fas fa-lock"></i> Исследование не завершено</div>
         {{/if}}
-        <footer class="ddm-page-footer"><span>✦</span> {{add selected.number 1}} <span>✦</span></footer>
+        <footer class="ddm-page-footer"><span>✦</span> {{nextPage}} <span>✦</span></footer>
       </section>
     </main>
     {{else}}
