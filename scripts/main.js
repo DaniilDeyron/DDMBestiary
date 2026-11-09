@@ -101,22 +101,25 @@ Hooks.once("ready",()=>{
   });
   game.keybindings.register(MODULE_ID,"open",{name:"Открыть бестиарий",hint:"Открыть общий бестиарий партии",editable:[{key:"KeyB",modifiers:["SHIFT"]}],onDown:()=>{new BestiaryApp().render(true);return true;},restricted:false});
   Hooks.on("getSceneControlButtons", controls => {
-    // Foundry v13 uses a record of controls and a record of tools.
-    const tokenControls = controls.tokens;
-    if (!tokenControls) {
-      console.warn("DDM Bestiary | Token scene control group was not found.", controls);
-      return;
-    }
-    tokenControls.tools = tokenControls.tools || {};
-    tokenControls.tools["ddm-bestiary-open"] = {
-      name: "ddm-bestiary-open",
-      title: "Открыть DDM Bestiary",
+    // Dedicated control group in the left scene-controls rail (Foundry v13).
+    // A v13 SceneControl requires activeTool and a tools record.
+    controls["ddm-bestiary"] = {
+      name: "ddm-bestiary",
+      title: "DDM Bestiary | Бестиарий",
       icon: "fa-solid fa-book-open",
-      button: true,
+      order: Object.keys(controls).length,
       visible: true,
-      order: Object.keys(tokenControls.tools).length,
-      onChange: () => {
-        new BestiaryApp().render(true);
+      activeTool: "open",
+      tools: {
+        open: {
+          name: "open",
+          title: "Открыть бестиарий",
+          icon: "fa-solid fa-book-open",
+          button: true,
+          visible: true,
+          order: 0,
+          onChange: () => new BestiaryApp().render(true)
+        }
       }
     };
   });
